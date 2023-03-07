@@ -1,0 +1,33 @@
+button:disabled{
+  opacity: .5 !important;
+}
+
+.sign__input #eye-hide {
+  position: absolute !important;
+      left: 92% !important;
+  top: 50% !important;
+  cursor: pointer !important;
+}
+
+.sign__input #eye-show {
+  position: absolute !important;
+  left: 92% !important;
+  top: 50% !important;
+  cursor: pointer !important;
+}
+
+.error {
+  border-color: #ff0000 !important;
+}
+
+.success {
+  border-color: #72c293 !important;
+}
+
+.error-msg {
+  color: #ff0000 !important;
+  left: 14px !important;
+  font-size: 12px !important;
+  width: 100% !important;
+  text-align: left;
+}

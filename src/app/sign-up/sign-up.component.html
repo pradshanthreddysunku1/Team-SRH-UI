@@ -1,0 +1,300 @@
+
+<!-- offcanvas area start -->
+<div class="offcanvas__area">
+  <div class="modal fade" id="offcanvasmodal" tabindex="-1" aria-labelledby="offcanvasmodal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="offcanvas__wrapper">
+          <div class="offcanvas__content">
+            <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
+              <div class="offcanvas__logo logo">
+                <a href="index.html">
+                  <img src="assets/img/logo/logo.png" alt="logo">
+                </a>
+              </div>
+              <div class="offcanvas__close">
+                <button class="offcanvas__close-btn" data-bs-toggle="modal" data-bs-target="#offcanvasmodal">
+                  <i class="fal fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="offcanvas__search mb-25">
+              <form action="#">
+                <input type="text" placeholder="What are you searching for?">
+                <button type="submit"><i class="far fa-search"></i></button>
+              </form>
+            </div>
+            <div class="mobile-menu fix"></div>
+            <div class="offcanvas__text d-none d-lg-block">
+              <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
+                born and will give you a complete account of the system and expound the actual teachings of the great
+                explore</p>
+            </div>
+            <div class="offcanvas__map d-none d-lg-block mb-15">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d29176.030811137334!2d90.3883827!3d23.924917699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1605272373598!5m2!1sen!2sbd"></iframe>
+            </div>
+            <div class="offcanvas__contact mt-30 mb-20">
+              <h4>Contact Info</h4>
+              <ul>
+                <li class="d-flex align-items-center">
+                  <div class="offcanvas__contact-icon mr-15">
+                    <i class="fal fa-map-marker-alt"></i>
+                  </div>
+                  <div class="offcanvas__contact-text">
+                    <a target="_blank"
+                      href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873">12/A,
+                      Mirnada City Tower, NYC</a>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="offcanvas__contact-icon mr-15">
+                    <i class="far fa-phone"></i>
+                  </div>
+                  <div class="offcanvas__contact-text">
+                    <a href="mailto:support@gmail.com">088889797697</a>
+                  </div>
+                </li>
+                <li class="d-flex align-items-center">
+                  <div class="offcanvas__contact-icon mr-15">
+                    <i class="fal fa-envelope"></i>
+                  </div>
+                  <div class="offcanvas__contact-text">
+                    <a href="tel:+012-345-6789">support@mail.com</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="offcanvas__social">
+              <ul>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- offcanvas area end -->
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<main>
+
+
+  <!-- sign up area start -->
+  <section class="signup__area p-relative z-index-1 pt-100 pb-145">
+    <div class="sign__shape">
+      <img class="man-1" src="assets/img/icon/sign/man-3.png" alt="">
+      <img class="man-2 man-22" src="assets/img/icon/sign/man-2.png" alt="">
+      <img class="circle" src="assets/img/icon/sign/circle.png" alt="">
+      <img class="zigzag" src="assets/img/icon/sign/zigzag.png" alt="">
+      <img class="dot" src="assets/img/icon/sign/dot.png" alt="">
+      <img class="bg" src="assets/img/icon/sign/sign-up.png" alt="">
+      <img class="flower" src="assets/img/icon/sign/flower.png" alt="">
+    </div>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+          <div class="sign__wrapper white-bg">
+
+            <div class="sign__form">
+              <form [formGroup]="signUpForm">
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Last Name</h5>
+                  <div class="sign__input">
+                    <input type="text" placeholder="Last Name" formControlName="lastName"
+                      [ngClass]="{ 'error': (fields_signUp_form['lastName'].touched && fields_signUp_form['lastName'].invalid) || (fields_signUp_form['lastName'].touched && fields_signUp_form['lastName'].errors?.['minlength'] ) ,'success':fields_signUp_form['lastName'].touched && fields_signUp_form['lastName'].valid }">
+                    <i class="fal fa-user"></i>
+                  </div>
+                  <div class="text-left error-container">
+                    <small *ngIf="fields_signUp_form['lastName'].touched && fields_signUp_form['lastName'].invalid"
+                      class="error-msg">
+                      <span *ngIf="fields_signUp_form['lastName'].errors?.['required']">Last Name is mandotory</span>
+                    </small>
+                    <small
+                      *ngIf="fields_signUp_form['lastName'].touched && fields_signUp_form['lastName'].errors?.['minlength'] "
+                      class="error-msg">
+                      <span>Last Name must have minimum 2 character</span>
+                    </small>
+                  </div>
+
+                </div>
+                <div class="sign__input-wrapper mb-25">
+                  <h5>First Name</h5>
+                  <div class="sign__input">
+                    <input type="text" placeholder="First Name" formControlName="firstName"
+                      [ngClass]="{ 'error': (fields_signUp_form['firstName'].touched && fields_signUp_form['firstName'].invalid) || (fields_signUp_form['firstName'].touched && fields_signUp_form['firstName'].errors?.['minlength']),'success':fields_signUp_form['firstName'].touched && fields_signUp_form['firstName'].valid }">
+                    <i class="fal fa-user"></i>
+                  </div>
+                  <div class="text-left error-container">
+                    <small *ngIf="fields_signUp_form['firstName'].touched && fields_signUp_form['firstName'].invalid"
+                      class="error-msg">
+                      <span *ngIf="fields_signUp_form['firstName'].errors?.['required']">First Name
+                        is mandatory</span>
+                    </small>
+                    <small
+                      *ngIf="fields_signUp_form['firstName'].touched && fields_signUp_form['firstName'].errors?.['minlength'] "
+                      class="error-msg">
+                      <span>First Name must have 2 minimum characters</span>
+                    </small>
+
+                  </div>
+
+                </div>
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Username</h5>
+                  <div class="sign__input">
+                    <input type="text" placeholder="Username" formControlName="userName"
+                      [ngClass]="{ 'error': (fields_signUp_form['userName'].touched && fields_signUp_form['userName'].invalid) || (fields_signUp_form['userName'].touched && fields_signUp_form['userName'].errors?.['minlength']),'success':fields_signUp_form['userName'].touched && fields_signUp_form['userName'].valid }">
+                    <i class="fal fa-user"></i>
+                  </div>
+                  <div class="text-left error-container">
+                    <small *ngIf="fields_signUp_form['userName'].touched && fields_signUp_form['userName'].invalid"
+                      class="error-msg">
+                      <span *ngIf="fields_signUp_form['userName'].errors?.['required']">Username is mandatory</span>
+                    </small>
+                    <small
+                      *ngIf="fields_signUp_form['userName'].touched && fields_signUp_form['userName'].errors?.['minlength'] "
+                      class="error-msg">
+                      <span>Username must have atleast 2 characters</span>
+                    </small>
+
+                  </div>
+                </div>
+
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Email</h5>
+                  <div class="sign__input">
+                    <input type="text" placeholder="Email" formControlName="email"
+                      [ngClass]="{ 'error':fields_signUp_form['email'].touched && fields_signUp_form['email'].invalid ,'success':fields_signUp_form['email'].touched && fields_signUp_form['email'].valid }">
+                    <i class="fal fa-envelope"></i>
+                  </div>
+                  <div class="text-left error-container">
+                    <div *ngIf="fields_signUp_form['email'].errors">
+                      <p class="text-left mb-0">
+                        <span
+                          *ngIf="fields_signUp_form['email'].touched && fields_signUp_form['email'].errors?.['required']"
+                          class="error-msg">Email
+                          is mandatory
+                        </span>
+                        <span
+                          *ngIf="fields_signUp_form['email'].touched && signUpForm.get('email')?.hasError('emailExists')"
+                          class="error-msg">
+                          An account already exists with this Email
+                        </span>
+                        <span
+                          *ngIf="(fields_signUp_form['email'].touched && fields_signUp_form['email'].invalid) && !signUpForm.get('email')?.hasError('emailExists') || (fields_signUp_form['email'].touched && fields_signUp_form['email'].errors?.['pattern']) "
+                          class="error-msg">
+                          Enter a valid Email
+                        </span>
+                      </p>
+
+                    </div>
+                  </div>
+
+                </div>
+
+                <ng-template #popTemplate>
+                  <div class="text-left" *ngIf="fields_signUp_form['password'].errors || disPlayErrors">
+
+                    <span
+                      *ngIf="(fields_signUp_form['password'].touched && fields_signUp_form['password'].invalid) || (fields_signUp_form['password'].touched && fields_signUp_form['password'].errors?.['pattern']) || disPlayErrors "
+                      class="error-msg">
+                      <span>
+                        <strong class="text-header text-dark">Your password must include :</strong>
+                      </span>
+
+                      <br>
+
+                      <span
+                        [ngClass]="signUpForm.get('password')?.hasError('hasCapitalCase') || signUpForm.get('password')?.hasError('required') ? 'text-dark' : 'text-success'">
+
+                        1
+                        Uppercase letter
+                      </span>
+                      <br>
+                      <span
+                        [ngClass]="signUpForm.get('password')?.hasError('hasSmallCase') || signUpForm.get('password')?.hasError('required') ? 'text-dark' : 'text-success'">
+
+                        1 Lowercase letter
+                      </span>
+                      <br>
+                      <span
+                        [ngClass]="signUpForm.get('password')?.hasError('hasNumber') || signUpForm.get('password')?.hasError('required') ? 'text-dark' : 'text-success'">
+
+                        1 digit
+                      </span>
+                      <br>
+                      <span
+                        [ngClass]="signUpForm.get('password')?.hasError('hasSpecialCharacters') || signUpForm.get('password')?.hasError('required') ? 'text-dark' : 'text-success'">
+
+                        1 special character
+                      </span>
+                      <br>
+                      <span
+                        [ngClass]="signUpForm.get('password')?.hasError('minlength') || signUpForm.get('password')?.hasError('required') ? 'text-dark' : 'text-success'">
+
+                        Minimum of 8 character length
+                      </span>
+
+                    </span>
+
+                  </div>
+                </ng-template>
+
+                <div class="sign__input-wrapper mb-25">
+                  <h5>Password</h5>
+                  <div class="sign__input">
+                    <i id="eye-show" *ngIf="show_button" class="far fa-eye" (click)="showPassword()"></i>
+                    <i id="eye-hide" *ngIf="!show_button" class="far fa-eye-slash" (click)="showPassword()"></i>
+
+                    <input [type]="show_button ? 'text' : 'password'" name="password"
+                      (change)="onPasswordChange()" [popover]="popTemplate" triggers="focus" placement="top"
+                      (focus)="disPlayErrors=true" (focusout)="disPlayErrors=false" placeholder="password"
+                      formControlName="password"
+                      [ngClass]="{ 'error':fields_signUp_form['password'].touched && fields_signUp_form['password'].invalid, 'success':fields_signUp_form['password'].touched && fields_signUp_form['password'].valid }">
+                    <i class="fal fa-lock"></i>
+                  </div>
+                  <div class="text-left error-container" *ngIf="fields_signUp_form['password'].errors || disPlayErrors">
+                    <small *ngIf="fields_signUp_form['password'].touched && fields_signUp_form['password'].invalid"
+                      class="error-msg">
+                      <span *ngIf="fields_signUp_form['password'].errors?.['required']">password is mandatory</span>
+                    </small>
+                    <small class="error-msg">
+                      <span
+                        *ngIf="(signUpForm.get('password')?.hasError('hasCapitalCase') || signUpForm.get('password')?.hasError('hasSmallCase') || signUpForm.get('password')?.hasError('hasNumber') || signUpForm.get('password')?.hasError('hasSpecialCharacters') || signUpForm.get('password')?.hasError('minlength')) && fields_signUp_form['password'].touched">
+                        your password is incorrect
+                      </span>
+                    </small>
+                  </div>
+                </div>
+                <div class="sign__input-wrapper mb-20">
+                  <h5>confirm password</h5>
+                  <div class="sign__input">
+                    <input type="password"  [ngClass]="{ 'error':fields_signUp_form['confirmPassword'].touched && fields_signUp_form['confirmPassword'].hasError('mismatch') ,'success':fields_signUp_form['confirmPassword'].touched && !fields_signUp_form['confirmPassword'].hasError('mismatch') }"  (change)="onPasswordChange()" placeholder="confirm password" formControlName="confirmPassword">
+                    <i class="fal fa-lock"></i>
+
+                  </div>
+                  <span class="error-msg" *ngIf="fields_signUp_form['confirmPassword'].hasError('mismatch')">passwords does not match</span>
+                </div>
+                <button class="tp-btn w-100" [disabled]="signUpForm.invalid " (click)="signUp()"> <span></span> create account</button>
+                <div class="sign__new text-center mt-20">
+                  <p>Already a member ? <a routerLink="/sign-in"> sign-in</a></p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- sign up area end -->
+
+
+</main>
