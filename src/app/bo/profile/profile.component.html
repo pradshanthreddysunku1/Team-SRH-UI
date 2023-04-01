@@ -1,0 +1,128 @@
+<main>
+
+  <section class="profile__area pt-50 pb-50 grey-bg-2">
+    <div class="container">
+      <div class="profile__basic-inner pb-20 white-bg">
+        <div class="row align-items-center">
+          <div class="col-xxl-6 col-md-6">
+            <div class="profile__basic d-md-flex align-items-center">
+              <div class="profile__basic-thumb mr-30">
+                <img src="https://gravatar.com/avatar/420b3334010e205ff40748d07fb4ccf2?s=400&d=robohash&r=x" alt="">
+              </div>
+              <div class="profile__basic-content">
+                <h3 class="profile__basic-title">
+                  Welcome <span>{{user?.firstName}}</span>
+                </h3>
+                <!-- <p>2 Running Courses <a href="my-course.html">View Course</a></p> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-xxl-6 col-md-6">
+            <div class="profile__basic-cart d-flex align-items-center justify-content-md-end">
+              <div class="cart-info mr-10">
+              </div>
+              <div class="cart-item">
+                <!-- <a href="cart.html">
+                    <i class="fa-regular fa-basket-shopping"></i>
+                  </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="profile__menu pb-70 grey-bg-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-3 col-md-3">
+          <div class="profile__menu-left white-bg mb-50">
+            <div class="profile__menu-tab">
+              <div class="nav nav-tabs flex-column justify-content-start text-start" id="nav-tab" role="tablist">
+
+                <button class="nav-link active" id="nav-account-tab" data-bs-toggle="tab" data-bs-target="#nav-account"
+                  type="button" role="tab" aria-controls="nav-account" aria-selected="true"> <i
+                    class="fa-regular fa-user-large"></i> My Account</button>
+
+                <button class="nav-link" routerLink="/sign-in"><i class="fa-regular fa-arrow-right-from-bracket"></i>
+                  Logout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-9 col-md-9">
+          <div class="profile__menu-right">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane show active" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                <div class="profile__info">
+
+                  <div class="profile__info-top d-flex justify-content-between align-items-center">
+                    <h3 class="profile__info-title">My details</h3>
+                    <button class="profile__info-btn" type="button" data-bs-toggle="modal"
+                      data-bs-target="#profile_edit_modal"><i class="fa-regular fa-pen-to-square"></i> Change</button>
+                  </div>
+
+                  <div class="profile__info-wrapper white-bg">
+                    <div class="profile__info-item">
+                      <p>lastName</p>
+                      <h4>{{user?.lastName}}</h4>
+                    </div>
+                    <div class="profile__info-item">
+                      <p>firstName</p>
+                      <h4>{{user?.firstName}}</h4>
+                    </div>
+                    <div class="profile__info-item">
+                      <p>Email</p>
+                      <h4>{{user?.email}}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- profile menu area end -->
+
+  <div class="profile__edit-modal">
+    <!-- Modal -->
+    <div class="modal" id="profile_edit_modal" tabindex="-1" aria-labelledby="profile_edit_modal" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="profile__edit-wrapper">
+            <div class="profile__edit-close">
+              <button type="button" class="profile__edit-close-btn" data-bs-toggle="modal"
+                data-bs-target="#course_enroll_modal"><i class="fa-light fa-xmark"></i></button>
+            </div>
+            <form [formGroup]="userUpdateForm">
+              <div class="profile__edit-input">
+                <p>lastName</p>
+                <input type="text" placeholder="Last Name" formControlName="lastName">
+              </div>
+              <div class="profile__edit-input">
+                <p>firstName</p>
+                <input type="text" placeholder="First Name" formControlName="firstName">
+              </div>
+              <div class="profile__edit-input">
+                <p>Email</p>
+                <input type="text" placeholder="Your Email" formControlName="email">
+              </div>
+
+              <div class="profile__edit-input">
+                <button type="submit" class="tp-btn w-100" [disabled]="userUpdateForm.invalid" data-bs-toggle="modal"
+                  (click)="updateUserInfo()">update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</main>

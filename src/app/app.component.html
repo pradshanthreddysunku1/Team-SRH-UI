@@ -1,0 +1,42 @@
+  <div id="loading">
+    <div id="loading-center">
+      <div id="loading-center-absolute">
+        <svg id="loader">
+          <path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -37.5" />
+        </svg>
+        <img src="assets/img/favicon.png" alt="">
+      </div>
+    </div>
+  </div>
+
+      <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-success">
+        <div class="navbar-nav-scroll container">
+          <ul class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item">
+              <a class="nav-link " routerLink=""> <i class="fa fa-address-book" aria-hidden="true"></i> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " routerLink="/translation"> <i class="fa fa-globe" aria-hidden="true"></i> Translation</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/about"> <i class="fa fa-users" aria-hidden="true"></i> About</a>
+              </li>
+                <li class="nav-item">
+                  <a class="nav-link " routerLink="/need-help"><i class="fa fa-info-circle" aria-hidden="true"></i> Help</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/sign-in"><i class="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/sign-up"> <i class="fa fa-lock" aria-hidden="true"></i> SignUp</a>
+              </li>
+          </ul>
+        </div>
+
+      </header>
+
+
+<router-outlet></router-outlet>
+
+
+

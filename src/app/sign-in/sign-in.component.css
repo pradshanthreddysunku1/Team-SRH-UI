@@ -1,0 +1,8 @@
+button:disabled{
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.sign__input  input{
+padding: 0 20px !important;
+}
