@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ENV } from './core/env.config';
 export interface Message {
   type: string;
   message: string;
@@ -40,7 +41,7 @@ export class AppComponent {
     });
     this.chatForm.reset();
     this.scrollToBottom();
-    this.http.post('${ENV.API_HOST_URL}/message', { prompt: sentMessage }).subscribe((response: any) => {
+    this.http.post(`${ENV.API_HOST_URL}/message`, { prompt: sentMessage }).subscribe((response: any) => {
       this.loading = false;
       this.messages.push({
         type: 'client',
