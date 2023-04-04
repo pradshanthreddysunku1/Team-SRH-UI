@@ -7,6 +7,7 @@ import { CustomValidators, CustomValidatorsPassword } from '../sign-up/custom-va
 import { JadoreService } from '../service/jadore.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 import { Text2speechService } from 'speech-synthesis-text-to-speech';
+import { DomSanitizer } from '@angular/platform-browser';
 declare var webkitSpeechRecognition: any;
 interface Language {
   language: string,
@@ -377,9 +378,11 @@ export class TranslationComponent {
   isShowMic: boolean = true;
   isShowStop: boolean = false;
   images: any = [];
+  videos: any = [];
   checked: boolean = false;
+  videoChecked: boolean = false;
 
-  constructor(private router: Router, private text2speechService: Text2speechService, public serviceVc: VoiceRecognitionService, private service: JadoreService, private formBuilder: FormBuilder, private toastr: ToastrService,) {
+  constructor(private router: Router, private text2speechService: Text2speechService, public serviceVc: VoiceRecognitionService, private service: JadoreService, private formBuilder: FormBuilder, private toastr: ToastrService,public sanitizer: DomSanitizer) {
 
     let url = `${ENV.API_HOST_URL}/languages`;
     this.service.get(url).subscribe(data => {
@@ -417,6 +420,7 @@ export class TranslationComponent {
       this.translatedText = data.term;
       this.isLoading = false;
        this.searchImages()
+       this.searchVideos()
 
     });
 
@@ -433,6 +437,22 @@ export class TranslationComponent {
       })
     }
   }
+
+  searchVideos() {
+
+    if (this.videoChecked && this.inputText !== "" && this.translatedText!=="" ) {
+      let urlVideos = `${ENV.API_HOST_URL}/videos/${this.inputText} ${this.translatedText}`;
+      this.service.get(urlVideos).subscribe(resVideos => {
+        console.log('videos', resVideos)
+        this.videos = resVideos['items']
+      })
+    }
+  }
+  updateVideoUrl(id: string) {
+    let url = 'https://www.youtube.com/embed/' + id;
+     let videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+     return videoUrl;
+   }
 
   clearInputs() {
     this.inputText = '';
@@ -471,6 +491,13 @@ export class TranslationComponent {
     console.log(event.target.checked)
     this.checked = event.target.checked;
     this.searchImages()
+  }
+
+  getVideos(event: any) {
+    this.videos = [];
+    console.log(event.target.checked)
+    this.videoChecked = event.target.checked;
+    this.searchVideos()
   }
 
   playAudio() {

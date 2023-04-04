@@ -1,42 +1,71 @@
-  <div id="loading">
-    <div id="loading-center">
-      <div id="loading-center-absolute">
-        <svg id="loader">
-          <path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -37.5" />
-        </svg>
-        <img src="assets/img/favicon.png" alt="">
-      </div>
+<div id="loading">
+  <div id="loading-center">
+    <div id="loading-center-absolute">
+      <svg id="loader">
+        <path id="corners" d="m 0 12.5 l 0 -12.5 l 50 0 l 0 50 l -50 0 l 0 -37.5" />
+      </svg>
+      <img src="assets/img/favicon.png" alt="">
     </div>
   </div>
+</div>
 
-      <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-success">
-        <div class="navbar-nav-scroll container">
-          <ul class="navbar-nav bd-navbar-nav flex-row">
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-success">
+      <div class="navbar-nav-scroll container">
+        <ul class="navbar-nav bd-navbar-nav flex-row">
+          <li class="nav-item">
+            <a class="nav-link " routerLink=""> <i class="fa fa-address-book" aria-hidden="true"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " routerLink="/translation"> <i class="fa fa-globe" aria-hidden="true"></i> Translation</a>
+          </li>
             <li class="nav-item">
-              <a class="nav-link " routerLink=""> <i class="fa fa-address-book" aria-hidden="true"></i> Home</a>
+              <a class="nav-link " routerLink="/about"> <i class="fa fa-users" aria-hidden="true"></i> About</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link " routerLink="/need-help"><i class="fa fa-info-circle" aria-hidden="true"></i> Help</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link " routerLink="/sign-in"><i class="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " routerLink="/translation"> <i class="fa fa-globe" aria-hidden="true"></i> Translation</a>
+              <a class="nav-link " routerLink="/sign-up"> <i class="fa fa-lock" aria-hidden="true"></i> SignUp</a>
             </li>
-              <li class="nav-item">
-                <a class="nav-link " routerLink="/about"> <i class="fa fa-users" aria-hidden="true"></i> About</a>
-              </li>
-                <li class="nav-item">
-                  <a class="nav-link " routerLink="/need-help"><i class="fa fa-info-circle" aria-hidden="true"></i> Help</a>
-                </li>
-              <li class="nav-item">
-                <a class="nav-link " routerLink="/sign-in"><i class="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " routerLink="/sign-up"> <i class="fa fa-lock" aria-hidden="true"></i> SignUp</a>
-              </li>
-          </ul>
-        </div>
+        </ul>
+      </div>
 
-      </header>
+    </header>
 
 
 <router-outlet></router-outlet>
 
-
-
+<div id="helpdesk">
+<button id="helpdesk-popup-button" (click)="openSupportPopup()">
+  Need Help?
+</button>
+<div id="helpdesk-popup" [style.display]="isOpen ? 'block' : 'none'">
+  <div id="helpdesk-popup-header">
+     Team Srh chat bot
+    <button id="helpdesk-popup-close-button" (click)="openSupportPopup()">
+      Close
+    </button>
+  </div>
+  <div id="helpdesk-popup-body">
+    <div class="messages" #scrollMe>
+      <div *ngFor="let message of messages" class="message">
+        <div [class]="message.type">
+          {{ message.message }}
+        </div>
+      </div>
+      <div *ngIf="loading" class="message" style="width: 100%; display: block">
+        <div [class]="'client'">...</div>
+      </div>
+    </div>
+  </div>
+  <form id="helpdesk-popup-footer" [formGroup]="chatForm">
+    <input formControlName="message" type="text" id="helpdesk-popup-input" placeholder="Type your message here..." />
+    <button id="helpdesk-popup-submit-button" [disabled]="!chatForm.valid" (click)="sendMessage()">
+      Send
+    </button>
+  </form>
+</div>
+</div>

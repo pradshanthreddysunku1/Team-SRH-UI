@@ -2,7 +2,8 @@
   <div class="section__title-wrapper-2 text-center mb-60">
     <h4 class="section__title-2 text-secondary">Language Translator</h4>
   </div>
-  Search with images : <input type="checkbox" [ngClass]="{'pointer_events_none': from=='' || to=='' }" [checked]="" (click)="doAction($event)">
+  Search with Images : <input type="checkbox" [ngClass]="{'pointer_events_none': from=='' || to=='' }" [checked]="" (click)="doAction($event)">
+  Search with Videos : <input type="checkbox" [ngClass]="{'pointer_events_none': from=='' || to=='' }" [checked]="" (click)="getVideos($event)">
 
   <div class="row">
     <div class="col-5 p-relative">
@@ -73,6 +74,16 @@
         <img src="{{image.url}}"  class="img-fluid"   alt="" srcset="">
       </div>
     </div>
+
+    <div class="row mt-50" *ngIf="videos.length>0 && videoChecked">
+      <div class="col-4 p-10" *ngFor="let video of videos">
+        <iframe  [src]="updateVideoUrl(video.id)">
+        </iframe>
+      </div>
+    </div>
+  
+    
+    
 
 </div>
 <div id="loader" *ngIf="isLoading"></div>
