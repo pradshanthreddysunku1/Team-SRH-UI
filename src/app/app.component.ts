@@ -40,7 +40,7 @@ export class AppComponent {
     });
     this.chatForm.reset();
     this.scrollToBottom();
-    this.http.post('http://localhost:8080/api/message', { prompt: sentMessage }).subscribe((response: any) => {
+    this.http.post('${ENV.API_HOST_URL}/message', { prompt: sentMessage }).subscribe((response: any) => {
       this.loading = false;
       this.messages.push({
         type: 'client',
