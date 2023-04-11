@@ -28,13 +28,16 @@ export class AppComponent {
   user:any;
   ngOnInit() {
 
-    if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
-      this.service.setIsLoggedIn(true);
-      this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
-    }
-
     this.service.isLoggedIn$.subscribe(state=>{
       this.isLoggedIn = state;
+      if(this.isLoggedIn){
+      if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
+        this.service.setIsLoggedIn(true);
+        this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
+      }
+    }else{
+        sessionStorage.removeItem("currentUser");
+    }
     })
     
   }
