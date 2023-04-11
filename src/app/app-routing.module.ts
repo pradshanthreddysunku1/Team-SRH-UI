@@ -10,7 +10,7 @@ import { NeedHelpComponent } from './need-help/need-help.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'translation', component: TranslationComponent },
+  // { path: 'translation', component: TranslationComponent },
   { path: 'about', component: AboutComponent },
   { path: 'need-help', component: NeedHelpComponent },
   { path: 'sign-up', component: SignUpComponent },

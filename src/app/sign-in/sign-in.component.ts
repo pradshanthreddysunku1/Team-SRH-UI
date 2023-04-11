@@ -29,7 +29,9 @@ export class SignInComponent {
     this.service.post(obj, url).subscribe(
       (data):any => {
         console.log('data', data)
-        this.router.navigate(['/bo/profile'], { state: { user: data } });
+        sessionStorage.setItem("currentUser", JSON.stringify(data))
+        this.service.setIsLoggedIn(true);
+        this.router.navigate(['/bo/translation']);
       },
       err => {
         console.log('err', err)

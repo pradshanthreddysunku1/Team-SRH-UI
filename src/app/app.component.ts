@@ -2,10 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ENV } from './core/env.config';
+import { JadoreService } from './service/jadore.service';
+import { Router } from '@angular/router';
 export interface Message {
   type: string;
   message: string;
 }
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,7 +24,22 @@ export class AppComponent {
   });
   @ViewChild('scrollMe') private myScrollContainer: any;
 
-  constructor( private http: HttpClient) {
+  isLoggedIn:boolean = false;
+  user:any;
+  ngOnInit() {
+
+    if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
+      this.service.setIsLoggedIn(true);
+      this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
+    }
+
+    this.service.isLoggedIn$.subscribe(state=>{
+      this.isLoggedIn = state;
+    })
+    
+  }
+
+  constructor( private http: HttpClient,  private service: JadoreService, private router: Router) {
     this.messages.push({
       type: 'client',
       message: 'Hi, I am your support agent. How can I help you?',
@@ -58,5 +76,12 @@ export class AppComponent {
           this.myScrollContainer.nativeElement.scrollHeight + 500;
       } catch (err) { }
     }, 150);
+  }
+
+  logout() {
+    this.service.setIsLoggedIn(false);
+    sessionStorage.removeItem("currentUser");
+    this.router.navigate(['/sign-in']);
+
   }
 }

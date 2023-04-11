@@ -44,9 +44,13 @@ export class ProfileComponent {
   isShowStop: boolean = false;
 
   constructor(private router: Router, private text2speechService:Text2speechService,public serviceVc: VoiceRecognitionService ,private service: JadoreService, private formBuilder: FormBuilder, private toastr: ToastrService,) {
-    let extras = this.router.getCurrentNavigation()?.extras?.state;
-
-    this.user = extras?.['user'];
+    // let extras = this.router.getCurrentNavigation()?.extras?.state;
+    if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
+      this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
+    }else{
+      this.toastr.error("You must sign-in to access your profile")
+      this.router.navigate(["/sign-in"]);
+    }
     this.userUpdateForm = this.formBuilder.group({
       firstName: [null, [Validators.required, Validators.minLength(2)]],
       lastName: [null, [Validators.required, Validators.minLength(2)]],

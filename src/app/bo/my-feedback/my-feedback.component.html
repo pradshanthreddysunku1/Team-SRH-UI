@@ -1,0 +1,47 @@
+
+<div class="container mt-50">
+<h4 class="section__title-3 text-secondary">My Feedbacks</h4>
+    <table class="table mt-20">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">From Language</th>
+            <th scope="col">Input Text</th>
+            <th scope="col">To Language</th>
+            <th scope="col">Output Text</th>
+            <th scope="col">Feedback</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="feedbacks.length > 0">
+          <tr *ngFor="let feedback of feedbacks; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{feedback?.fromLanguage}}</td>
+            <td>{{feedback?.inputText}}</td>
+            <td>{{feedback?.toLanguage}}</td>
+            <td>{{feedback?.outputText}}</td>
+            <td>{{feedback?.feedbackText}}</td>
+            <td><i class="fa fa-edit" data-bs-toggle="modal"
+                data-bs-target="#profile_edit_modal" (click)="editFeedback(feedback?._id)"></i><i class="fa fa-trash ml-10" (click)="deleteFeedback(feedback?._id)" ></i></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<div class="modal" id="profile_edit_modal" tabindex="-1" aria-labelledby="profile_edit_modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="profile__edit-wrapper">
+          <div class="profile__edit-close">
+            <button type="button" class="profile__edit-close-btn" data-bs-toggle="modal"
+              data-bs-target="#course_enroll_modal"><i class="fa-light fa-xmark"></i></button>
+          </div>
+          <textarea class="form-control mt-1"  id="" cols="" rows="6"
+         [(ngModel)]='feedbackText' [ngModelOptions]="{standalone:true}"></textarea>
+
+         <button class="btn-sm btn-primary mt-10 mb-10" data-bs-toggle="modal" (click)="sendFeedback()">
+            <i class="fa fa-save pl-5 pr-5"></i> Update 
+         </button>
+        </div>
+      </div>
+    </div>
+    </div>

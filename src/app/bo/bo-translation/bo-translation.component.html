@@ -1,0 +1,104 @@
+<div  class="container mt-40 " id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
+    <div class="section__title-wrapper-2 text-center mb-60">
+      <h4 class="section__title-2 text-secondary">Language Translator</h4>
+    </div>
+    Search with Images : <input type="checkbox" [ngClass]="{'pointer_events_none': from=='' || to=='' }" [checked]="" (click)="doAction($event)">
+    Search with Videos : <input type="checkbox" [ngClass]="{'pointer_events_none': from=='' || to=='' }" [checked]="" (click)="getVideos($event)">
+  
+    <div class="row">
+      <div class="col-5 p-relative">
+        <label for="" class="d-block bg-success text-white p-1 m-1 d-inline-block">Select input language</label>
+        <select class="form-select" [(ngModel)]='from' [ngModelOptions]="{standalone:true}"
+          aria-label="Default select example" (change)="Change($event, 'from')">
+          <option selected>Select language</option>
+          <option *ngFor="let lang of fromLanguagesList" value="{{lang?.code}}">{{lang?.language}}</option>
+        </select>
+        <div class="text-right p-absolute" [ngClass]="{'pointer_events_none': from=='' || to=='' }"
+          style="right: 28px;top: 30%;">
+          <i class="fa fa-times pl-10" *ngIf="inputText.length>0" (click)="clearInputs()"></i>
+        </div>
+        <textarea class="form-control mt-1" [disabled]="from=='' || to==''" name="translate" id="" cols="" rows="6"
+          #textInput [(ngModel)]='inputText' [ngModelOptions]="{standalone:true}"></textarea>
+        <div class="text-left mt-2" [ngClass]="{'pointer_events_none': from=='' || to=='' }"
+          style="bottom: 15px;left: 24px;">
+          <button class="btn-sm btn-primary" (click)="startService()" [ngClass]="{'pointer_events_none': from=='' || to=='' }">
+            <i class="fa fa-microphone pl-5 pr-5"></i>
+          </button>
+          <button class="btn-sm btn-danger  ml-20" *ngIf="isShowStop" (click)="stopService()">
+            <i class="fa fa-stop pl-5 pr-5"></i>
+          </button>
+          <button class="btn-sm btn-success ml-10 " (click)="playAudio()" *ngIf="inputText.length>0">
+            <i class="fa fa-volume-up pl-5 pr-5"></i>
+          </button>
+        </div>
+  
+      </div>
+      <div class="col-1 m-auto  text-center bg-warning rounded-pill"><i class="fa fa-exchange" aria-hidden="true"
+          (click)="swap(from, to,inputText,translatedText)"></i></div>
+  
+      <div class="col-5 p-relative ">
+        <label for="" class="d-block bg-success text-white p-1 m-1 d-inline-block">Select output language</label>
+        <select class="form-select" [(ngModel)]='to' [ngModelOptions]="{standalone:true}"
+          aria-label="Default select example" (change)="Change($event, 'to')">
+          <option selected>Select language</option>
+          <option *ngFor="let lang of toLanguagesList" value="{{lang?.code}}">{{lang?.language}}</option>
+        </select>
+        <textarea [disabled]="from=='' || to==''" class="form-control mt-1" [(ngModel)]='translatedText'
+          [ngModelOptions]="{standalone:true}" name="translate" id="" cols="" rows="6"></textarea>
+        <div class="text-right mt-2" [ngClass]="{'pointer_events_none': from=='' || to=='' }"
+          style="bottom: 15px;left: 24px;">
+          <button class="btn-sm btn-success ml-10 " (click)="playAudio2()" *ngIf="translatedText.length>0">
+            <i class="fa fa-volume-up pl-5 pr-5"></i>
+          </button>
+  
+        </div>
+      </div>
+    </div>
+    <button type="button" [disabled]="from=='' || to==''" class="btn btn-secondary  btn-block mt-10 w-100 d-block mx-auto"
+      (click)="translate(textInput)">
+      Translate</button>
+      <div  class="d-flex mt-10" style="overflow-x: scroll;">
+      <div *ngFor="let phrase of  mostPopularPharses">
+        <button class="btn btn-outline-primary ml-10" style="white-space:nowrap" [ngClass]="{'active':phrase.isShow}" (click)="changeIsShow(phrase.categeory)">
+          {{phrase.categeory}}
+        </button>
+      </div>
+      </div>
+      <div *ngFor="let phrase of  mostPopularPharses">
+          <span *ngIf="phrase.isShow" class="d-flex align-content-end flex-wrap mt-10">
+            <p class="border p-1 rounded-1 mt-10 mr-10 question" (click)="translateQuestion(question)" *ngFor="let question of phrase.questions">{{question}}</p>
+          </span>
+      </div>
+      <div>
+        Feedback:
+
+        <textarea class="form-control mt-1" [disabled]="from=='' || to==''" name="translate" id="" cols="" rows="6"
+         [(ngModel)]='feedbackText' [ngModelOptions]="{standalone:true}"></textarea>
+
+         <button class="btn-sm btn-primary mt-10 mb-10" (click)="sendFeedback()" [ngClass]="{'pointer_events_none': from=='' || to=='' || feedbackText == ''}">
+            <i class="fa fa-send pl-5 pr-5"></i> Send 
+         </button>
+      </div>
+      <div class="row mt-50"  *ngIf="images.length>0 && checked">
+        <div class="col-4" *ngFor="let image of images">
+          <img src="{{image.url}}"  class="img-fluid"   alt="" srcset="">
+        </div>
+      </div>
+  
+      <div class="row mt-50" *ngIf="videos.length>0 && videoChecked">
+        <div class="col-4 p-10" *ngFor="let video of videos">
+          <iframe  [src]="updateVideoUrl(video.id)">
+          </iframe>
+        </div>
+      </div>
+    
+      
+      
+  
+  </div>
+  <div id="loader" *ngIf="isLoading"></div>
+  
+  
+  
+  
+  

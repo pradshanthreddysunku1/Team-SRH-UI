@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ENV } from 'src/app/core/env.config';
-import { CustomValidators, CustomValidatorsPassword } from '../sign-up/custom-validators';
-import { JadoreService } from '../service/jadore.service';
+import { CustomValidators, CustomValidatorsPassword } from '../../sign-up/custom-validators';
+import { JadoreService } from '../../service/jadore.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 import { Text2speechService } from 'speech-synthesis-text-to-speech';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,12 +14,13 @@ interface Language {
   code: string
 }
 
+
 @Component({
-  selector: 'app-translation',
-  templateUrl: './translation.component.html',
-  styleUrls: ['./translation.component.css']
+  selector: 'app-bo-translation',
+  templateUrl: './bo-translation.component.html',
+  styleUrls: ['./bo-translation.component.css']
 })
-export class TranslationComponent {
+export class BoTranslationComponent {
   mostPopularPharses = [
     {
       categeory: 'Basics',
@@ -381,9 +382,14 @@ export class TranslationComponent {
   videos: any = [];
   checked: boolean = false;
   videoChecked: boolean = false;
+  feedbackText: string = "";
+
 
   constructor(private router: Router, private text2speechService: Text2speechService, public serviceVc: VoiceRecognitionService, private service: JadoreService, private formBuilder: FormBuilder, private toastr: ToastrService,public sanitizer: DomSanitizer) {
    
+    if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
+      this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
+    }
    
     let url = `${ENV.API_HOST_URL}/languages`;
     this.service.get(url).subscribe(data => {
@@ -591,6 +597,30 @@ export class TranslationComponent {
     this.from = 'en';
     this.inputText = question;
     this.translate({ value: question });
+  }
+
+  sendFeedback(){
+    let obj = {
+      "fromLanguage": this.fromLanguagesList.filter(Long=>Long.code == this.from)[0].language,
+      "inputText": this.inputText,
+      "toLanguage": this.fromLanguagesList.filter(Long=>Long.code == this.to)[0].language,
+      "outputText": this.translatedText,
+      "feedbackText": this.feedbackText,
+      "user": 
+        {
+          "id": this.user.id
+        }
+    }
+    console.log(obj)
+
+    this.service.post(obj, `${ENV.API_HOST_URL}/feedback`).subscribe(res=> {
+      if(res["success"] == true){
+        this.toastr.success("Feedback is successfully sent!");
+        this.feedbackText = '';
+      }else{
+        this.toastr.error("Something went wrong, please try after sometime!");
+      }
+    })
   }
 
 }

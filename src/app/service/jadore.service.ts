@@ -21,6 +21,8 @@ export class JadoreService {
   private modalSate = new BehaviorSubject<any>(null);
   public modalSate$ = this.modalSate.asObservable();
 
+  private isLoggedIn = new BehaviorSubject<any>(false);
+  public isLoggedIn$ = this.isLoggedIn.asObservable();
 
   private modalSateInstructor = new BehaviorSubject<any>(null);
   public modalSateInstructor$ = this.modalSateInstructor.asObservable();
@@ -30,6 +32,10 @@ export class JadoreService {
   }
   setRefreshInstructorData(state:any) {
     this.refreshInstructorData.next(state);
+  }
+
+  setIsLoggedIn(state:boolean){
+    this.isLoggedIn.next(state);
   }
 
 

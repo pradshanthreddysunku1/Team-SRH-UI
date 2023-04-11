@@ -9,9 +9,13 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { BoTranslationComponent } from './bo-translation/bo-translation.component';
+import { MyFeedbackComponent } from './my-feedback/my-feedback.component';
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    BoTranslationComponent,
+    MyFeedbackComponent
   ],
   imports: [
     FormsModule,

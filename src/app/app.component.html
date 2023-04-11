@@ -11,26 +11,43 @@
 
     <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-success">
       <div class="navbar-nav-scroll container">
-        <ul class="navbar-nav bd-navbar-nav flex-row">
-          <li class="nav-item">
-            <a class="nav-link " routerLink=""> <i class="fa fa-address-book" aria-hidden="true"></i> Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " routerLink="/translation"> <i class="fa fa-globe" aria-hidden="true"></i> Translation</a>
-          </li>
-            <li class="nav-item">
-              <a class="nav-link " routerLink="/about"> <i class="fa fa-users" aria-hidden="true"></i> About</a>
-            </li>
+        <div class="d-flex w-100 justify-content-between" >
+          <div>
+            <ul class="navbar-nav bd-navbar-nav flex-row">
               <li class="nav-item">
-                <a class="nav-link " routerLink="/need-help"><i class="fa fa-info-circle" aria-hidden="true"></i> Help</a>
+                <a class="nav-link " routerLink=""> <i class="fa fa-address-book" aria-hidden="true"></i> Home</a>
               </li>
-            <li class="nav-item">
-              <a class="nav-link " routerLink="/sign-in"><i class="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " routerLink="/sign-up"> <i class="fa fa-lock" aria-hidden="true"></i> SignUp</a>
-            </li>
-        </ul>
+              <!-- <li class="nav-item">
+                <a class="nav-link " routerLink="/translation"> <i class="fa fa-globe" aria-hidden="true"></i> Translation</a>
+              </li> -->
+                <li class="nav-item">
+                  <a class="nav-link " routerLink="/about"> <i class="fa fa-users" aria-hidden="true"></i> About</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link " routerLink="/need-help"><i class="fa fa-info-circle" aria-hidden="true"></i> Help</a>
+                  </li>
+                <li class="nav-item" *ngIf="!isLoggedIn">
+                  <a class="nav-link " routerLink="/sign-in"><i class="fa fa-sign-in" aria-hidden="true"></i> SignIn</a>
+                </li>
+                <li class="nav-item" *ngIf="!isLoggedIn">
+                  <a class="nav-link " routerLink="/sign-up"> <i class="fa fa-lock" aria-hidden="true"></i> SignUp</a>
+                </li>
+            </ul>
+          </div>
+          <div>
+            <div class="dropdown" *ngIf="isLoggedIn">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{user?.firstName}} {{user?.lastName}}
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="/bo/profile">Profile</a></li>
+                <li><a class="dropdown-item" routerLink="/bo/translation">Translation</a></li>
+                <li><a class="dropdown-item" routerLink="/bo/feedback">My Feedback</a></li>
+                <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
     </header>
