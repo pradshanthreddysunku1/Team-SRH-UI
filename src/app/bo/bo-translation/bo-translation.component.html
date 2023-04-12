@@ -55,7 +55,7 @@
       </div>
     </div>
     <button type="button" [disabled]="from=='' || to==''" class="btn btn-secondary  btn-block mt-10 w-100 d-block mx-auto"
-      (click)="translate(textInput)">
+      (click)="translate(textInput)" [ngClass]="{'pointer_events_none': from=='' || to=='' }">
       Translate</button>
       <div  class="d-flex mt-10" style="overflow-x: scroll;">
       <div *ngFor="let phrase of  mostPopularPharses">

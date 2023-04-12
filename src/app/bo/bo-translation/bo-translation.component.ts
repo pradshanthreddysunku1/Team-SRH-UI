@@ -403,9 +403,6 @@ export class BoTranslationComponent {
   }
 
 
-
-
-
   Change($event: any, type: string) {
     if (type == 'from') {
       this.init($event.target.value)
@@ -426,9 +423,10 @@ export class BoTranslationComponent {
     let url = `${ENV.API_HOST_URL}/translate`;
     this.service.post({ from: this.from, to: this.to, term: text.value }, url).subscribe(data => {
       this.translatedText = data.term;
+      this.sendHistory();
       this.isLoading = false;
-       this.searchImages()
-       this.searchVideos()
+       this.searchImages();
+       this.searchVideos();
 
     });
 
@@ -611,7 +609,7 @@ export class BoTranslationComponent {
           "id": this.user.id
         }
     }
-    console.log(obj)
+    // console.log(obj)
 
     this.service.post(obj, `${ENV.API_HOST_URL}/feedback`).subscribe(res=> {
       if(res["success"] == true){
@@ -621,6 +619,29 @@ export class BoTranslationComponent {
         this.toastr.error("Something went wrong, please try after sometime!");
       }
     })
-  }
 
+    
+}
+
+sendHistory(){
+  let obj = {
+    "fromLanguage": this.fromLanguagesList.filter(Long=>Long.code == this.from)[0].language,
+    "inputText": this.inputText,
+    "toLanguage": this.fromLanguagesList.filter(Long=>Long.code == this.to)[0].language,
+    "outputText": this.translatedText,
+    "user": 
+      {
+        "id": this.user.id
+      }
+  }
+console.log("history", obj)
+  this.service.post(obj, `${ENV.API_HOST_URL}/history`).subscribe(res=> {
+    if(res["success"] == true){
+      this.toastr.success("The translation has been added successfully to your history!");
+      this.feedbackText = '';
+    }else{
+      this.toastr.error("Something went wrong, please try after sometime!");
+    }
+  })
+}
 }

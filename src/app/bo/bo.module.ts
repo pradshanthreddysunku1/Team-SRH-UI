@@ -11,11 +11,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { BoTranslationComponent } from './bo-translation/bo-translation.component';
 import { MyFeedbackComponent } from './my-feedback/my-feedback.component';
+import { MyHistoryComponent } from './my-history/my-history.component';
 @NgModule({
   declarations: [
     ProfileComponent,
     BoTranslationComponent,
-    MyFeedbackComponent
+    MyFeedbackComponent,
+    MyHistoryComponent
   ],
   imports: [
     FormsModule,

@@ -22,7 +22,8 @@
             <td>{{feedback?.outputText}}</td>
             <td>{{feedback?.feedbackText}}</td>
             <td><i class="fa fa-edit" data-bs-toggle="modal"
-                data-bs-target="#profile_edit_modal" (click)="editFeedback(feedback?._id)"></i><i class="fa fa-trash ml-10" (click)="deleteFeedback(feedback?._id)" ></i></td>
+                data-bs-target="#profile_edit_modal" (click)="editFeedback(feedback?._id)"></i>
+                <i class="fa fa-trash ml-10" (click)="deleteFeedback(feedback?._id)" ></i></td>
           </tr>
         </tbody>
       </table>
@@ -33,7 +34,7 @@
         <div class="profile__edit-wrapper">
           <div class="profile__edit-close">
             <button type="button" class="profile__edit-close-btn" data-bs-toggle="modal"
-              data-bs-target="#course_enroll_modal"><i class="fa-light fa-xmark"></i></button>
+              data-bs-target="#course_enroll_modal"><i class="fa fa-times"></i></button>
           </div>
           <textarea class="form-control mt-1"  id="" cols="" rows="6"
          [(ngModel)]='feedbackText' [ngModelOptions]="{standalone:true}"></textarea>

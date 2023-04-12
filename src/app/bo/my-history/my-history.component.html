@@ -1,0 +1,26 @@
+
+<div class="container mt-50">
+    <h4 class="section__title-3 text-secondary">My Translation History</h4>
+        <table class="table mt-20">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">From Language</th>
+                <th scope="col">Input Text</th>
+                <th scope="col">To Language</th>
+                <th scope="col">Output Text</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="histories.length > 0">
+              <tr *ngFor="let history of histories; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{history?.fromLanguage}}</td>
+                <td>{{history?.inputText}}</td>
+                <td>{{history?.toLanguage}}</td>
+                <td>{{history?.outputText}}</td>
+                <td><i class="fa fa-trash ml-10" (click)="deleteHistory(history?._id)" ></i></td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
