@@ -35,7 +35,8 @@ export class MyHistoryComponent {
   deleteHistory(id:string){
 
     let url = `${ENV.API_HOST_URL}/history/${id}`;
-    this.service.delete(url).subscribe(data => {
+    let history = this.histories.filter((feedback: { _id: string; }):any => feedback._id==id)
+    this.service.post({ "inputText" : history[0].inputText, "outputText" : history[0].outputText }, url).subscribe(data => {
       if(data["success"] == true){
         this.histories = this.histories.filter((feedback: { _id: string; }):any => feedback._id!=id)
         this.toastr.success("The history item has been successfully deleted")

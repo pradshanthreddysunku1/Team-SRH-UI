@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ENV } from 'src/app/core/env.config';
 import { JadoreService } from 'src/app/service/jadore.service';
@@ -20,7 +20,7 @@ export class MyFeedbackComponent {
     
   }
 
-  constructor( private service: JadoreService, private toastr: ToastrService) {
+  constructor( private service: JadoreService, private toastr: ToastrService, private cd:ChangeDetectorRef) {
    
     if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
       this.user = JSON.parse(sessionStorage.getItem("currentUser") || "");
@@ -32,13 +32,15 @@ export class MyFeedbackComponent {
     let url = `${ENV.API_HOST_URL}/feedback/${this.user.id}`;
     this.service.get(url).subscribe(data => {
       this.feedbacks = data;
+      // this.cd.detectChanges();
       console.log("feedback key", data)
     });
   }
   deleteFeedback(id:string){
 
     let url = `${ENV.API_HOST_URL}/feedback/${id}`;
-    this.service.delete(url).subscribe(data => {
+    let feedback = this.feedbacks.filter((feedback: { _id: string; }):any => feedback._id==id)
+    this.service.post( { "inputText" : feedback[0].inputText, "outputText" : feedback[0].outputText },url).subscribe(data => {
       if(data["success"] == true){
         this.feedbacks = this.feedbacks.filter((feedback: { _id: string; }):any => feedback._id!=id)
         this.toastr.success("The feedback has been successfully deleted")

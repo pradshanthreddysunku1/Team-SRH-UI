@@ -60,8 +60,8 @@ export class SignUpComponent {
     let url = `${ENV.API_HOST_URL}/auth/signup`;
     this.service.post(obj, url).subscribe(
       data => {
-        this.router.navigate(['/sign-in'])
-        this.toastr.success('Sign-in to open your account', 'Your account has been successfully created!' );
+        // this.router.navigate(['/sign-in'])
+        this.toastr.success('Your account has been successfully created, check your email to activate your account');
       },
       err => {
         console.log('err', err)

@@ -36,8 +36,12 @@
                 </div>
                 <button class="tp-btn  w-100" [disabled]="signInForm.invalid" (click)="signIn()"> <span></span> sign-in</button>
                 <div class="sign__new text-center mt-20">
+                   <a routerLink="/forgot-password">Forgot Password</a>
+                </div>
+                <div class="sign__new text-center mt-20">
                   <p>Do not have an account ? <a routerLink="/sign-up">Create an account</a></p>
                 </div>
+               
               </form>
             </div>
           </div>

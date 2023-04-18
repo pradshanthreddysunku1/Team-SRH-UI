@@ -20,6 +20,9 @@ import { TranslationComponent } from './translation/translation.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AboutComponent } from './about/about.component';
 import { NeedHelpComponent } from './need-help/need-help.component';
+import { AccountActivateComponent } from './account-activate/account-activate.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { NeedHelpComponent } from './need-help/need-help.component';
     TranslationComponent,
     AboutComponent,
     NeedHelpComponent,
+    AccountActivateComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
 
   ],
   imports: [
