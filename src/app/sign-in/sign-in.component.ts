@@ -11,6 +11,8 @@ import {ENV } from '../core/env.config'
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
+
+  isAccountActivated:boolean = false;
   signInForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private service: JadoreService, private router: Router) {
     this.signInForm = this.formBuilder.group({
@@ -21,6 +23,7 @@ export class SignInComponent {
 
 
   signIn() {
+
     let obj = {
       password: this.signInForm.get('password')?.value,
       username: this.signInForm.get('username')?.value
@@ -29,9 +32,13 @@ export class SignInComponent {
     this.service.post(obj, url).subscribe(
       (data):any => {
         console.log('data', data)
-        sessionStorage.setItem("currentUser", JSON.stringify(data))
-        this.service.setIsLoggedIn(true);
-        this.router.navigate(['/bo/translation']);
+        if(data['isActivated'] == true){
+          sessionStorage.setItem("currentUser", JSON.stringify(data))
+          this.service.setIsLoggedIn(true);
+          this.router.navigate(['/bo/translation']);
+        }else{
+          this.toastr.error("Your account is not activated, check your email to activate your account!");
+        }
       },
       err => {
         console.log('err', err)
