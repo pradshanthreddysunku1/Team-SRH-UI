@@ -37,5 +37,3 @@ export class AccountActivateComponent {
 
   }
 }
-
-// http://localhost:8080/api/account-activate?id=643ec73fd7560d31d828bd88

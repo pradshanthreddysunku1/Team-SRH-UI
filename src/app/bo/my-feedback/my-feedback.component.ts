@@ -15,6 +15,7 @@ export class MyFeedbackComponent {
   idToEdit:any;
   feedbackText: any;
   selectedFeedback:any;
+  p: number = 1;
 
   ngOnInit(){
     

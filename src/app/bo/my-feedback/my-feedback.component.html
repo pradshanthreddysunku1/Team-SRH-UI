@@ -14,8 +14,8 @@
           </tr>
         </thead>
         <tbody *ngIf="feedbacks.length > 0">
-          <tr *ngFor="let feedback of feedbacks; let i = index">
-            <td>{{i+1}}</td>
+          <tr *ngFor="let feedback of feedbacks | paginate: { itemsPerPage: 8, currentPage: p }; let i = index">
+            <td>{{((p-1) * 8 + (i+1))}}</td>
             <td>{{feedback?.fromLanguage}}</td>
             <td>{{feedback?.inputText}}</td>
             <td>{{feedback?.toLanguage}}</td>
@@ -27,6 +27,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 <div class="modal" id="profile_edit_modal" tabindex="-1" aria-labelledby="profile_edit_modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

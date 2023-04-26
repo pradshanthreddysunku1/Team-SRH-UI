@@ -13,8 +13,8 @@
               </tr>
             </thead>
             <tbody *ngIf="histories.length > 0">
-              <tr *ngFor="let history of histories; let i = index">
-                <td>{{i+1}}</td>
+              <tr *ngFor="let history of histories | paginate: { itemsPerPage: 2, currentPage: p }; let i = index">
+                <td>{{((p-1) * 2 + (i+1))}}</td>
                 <td>{{history?.fromLanguage}}</td>
                 <td>{{history?.inputText}}</td>
                 <td>{{history?.toLanguage}}</td>
@@ -23,4 +23,5 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>

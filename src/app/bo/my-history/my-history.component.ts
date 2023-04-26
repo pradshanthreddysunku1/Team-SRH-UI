@@ -13,6 +13,7 @@ export class MyHistoryComponent {
   histories:any = [];
   user:any;
   selectedHistory:any;
+  p: number = 1;
 
   ngOnInit(){
     

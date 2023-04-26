@@ -43,28 +43,6 @@ export class ForgotPasswordComponent {
   }
 
 
-  // signIn() {
-  //   let obj = {
-  //     password: this.signInForm.get('password')?.value,
-  //     username: this.signInForm.get('username')?.value
-  //   }
-  //   let url = `${ENV.API_HOST_URL}/auth/signin`;
-  //   this.service.post(obj, url).subscribe(
-  //     (data):any => {
-  //       console.log('data', data)
-  //       sessionStorage.setItem("currentUser", JSON.stringify(data))
-  //       this.service.setIsLoggedIn(true);
-  //       this.router.navigate(['/bo/translation']);
-  //     },
-  //     err => {
-  //       console.log('err', err)
-  //       this.toastr.error(err.error.message);
-  //     },
-  //     () => {
-  //       console.log("Complete function triggered.")
-  //     }
-  //   );
-
-  // }
+ 
 
 }

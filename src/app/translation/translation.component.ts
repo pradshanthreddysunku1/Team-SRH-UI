@@ -512,9 +512,11 @@ export class TranslationComponent {
   }
 
   playAudio2() {
+    console.log('to', this.to)
     let speech = new SpeechSynthesisUtterance();
     speech.lang = this.to;
     speech.text = this.translatedText;
+    console.log("trtext", this.translatedText)
     speech.rate = 1;
     window.speechSynthesis.speak(speech);
   }
@@ -528,9 +530,6 @@ export class TranslationComponent {
     }
 
   }
-
-
-
 
   init(lng: any) {
 
