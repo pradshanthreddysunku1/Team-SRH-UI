@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ENV } from './core/env.config';
 import { JadoreService } from './service/jadore.service';
 import { Router } from '@angular/router';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 export interface Message {
   type: string;
   message: string;
@@ -14,7 +15,7 @@ export interface Message {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'app';
   isOpen = false;
   loading = false;
@@ -23,12 +24,26 @@ export class AppComponent {
     message: new FormControl('', [Validators.required]),
   });
   @ViewChild('scrollMe') private myScrollContainer: any;
+  
 
   isLoggedIn:boolean = false;
   user:any;
-  ngOnInit() {
+  
+private subscription: Subscription;
+  ngOnInit() {  
+  }
 
-    this.service.isLoggedIn$.subscribe(state=>{
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  constructor( private http: HttpClient,  private service: JadoreService, private router: Router) {
+    this.messages.push({
+      type: 'client',
+      message: 'Hi, I am your support agent. How can I help you?',
+    });
+
+    this.subscription =  this.service.isLoggedIn$.subscribe(state=>{
       this.isLoggedIn = state;
       if(this.isLoggedIn){
       if(sessionStorage.getItem("currentUser") != null && sessionStorage.getItem("currentUser") != undefined){
@@ -40,13 +55,6 @@ export class AppComponent {
     }
     })
     
-  }
-
-  constructor( private http: HttpClient,  private service: JadoreService, private router: Router) {
-    this.messages.push({
-      type: 'client',
-      message: 'Hi, I am your support agent. How can I help you?',
-    });
   }
 
   openSupportPopup() {

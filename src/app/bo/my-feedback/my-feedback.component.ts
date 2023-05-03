@@ -8,7 +8,10 @@ import { JadoreService } from 'src/app/service/jadore.service';
   templateUrl: './my-feedback.component.html',
   styleUrls: ['./my-feedback.component.css']
 })
+
+
 export class MyFeedbackComponent {
+
 
   feedbacks:any = [];
   user:any;
@@ -33,7 +36,6 @@ export class MyFeedbackComponent {
     let url = `${ENV.API_HOST_URL}/feedback/${this.user.id}`;
     this.service.get(url).subscribe(data => {
       this.feedbacks = data;
-      // this.cd.detectChanges();
       console.log("feedback key", data)
     });
   }
@@ -60,7 +62,7 @@ export class MyFeedbackComponent {
   }
 
   sendFeedback(){
-    let obj = {
+    let obj:any = {
       "fromLanguage": this.selectedFeedback.fromLanguage,
       "inputText": this.selectedFeedback.inputText,
       "toLanguage": this.selectedFeedback.toLanguage,
@@ -74,13 +76,13 @@ export class MyFeedbackComponent {
     // console.log(obj)
 
     this.service.put(obj, `${ENV.API_HOST_URL}/feedback/${this.idToEdit}`).subscribe(res=> {
-      if(res["_id"]){
+      let index = this.feedbacks.findIndex((el: { _id: any; }) => el._id == this.idToEdit)
+      obj['_id'] = this.idToEdit;
+      this.feedbacks[index] = obj;
+      this.cd.detectChanges();
+      console.log("new feedback", this.feedbacks)
         this.toastr.success("Feedback is successfully updated!");
-        this.feedbackText = '';
-        this.getFeedbacks();
-      }else{
-        this.toastr.error("Something went wrong, please try after sometime!");
-      }
+      
     })
   }
 
